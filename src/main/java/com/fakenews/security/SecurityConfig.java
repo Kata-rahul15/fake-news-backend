@@ -87,7 +87,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
                 "http://localhost:3000",
-                "https://fake-news-frontend-ebon.vercel.app/"
+                "https://fake-news-frontend-ebon.vercel.app"
         ));
 
         config.setAllowedMethods(
