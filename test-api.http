@@ -1,0 +1,12 @@
+### REGISTER USER
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "rahul",
+  "password": "12345",
+  "fullName": "K Rahul"
+}
+
+###
