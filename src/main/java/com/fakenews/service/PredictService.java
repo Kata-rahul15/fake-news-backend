@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
+import org.springframework.beans.factory.annotation.Value;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +20,9 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class PredictService {
+
+    @Value("${ml.service.url}")
+    private String mlUrl;
 
     private final UserRepository userRepository;
 
@@ -33,9 +36,6 @@ public class PredictService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    // 🔹 FastAPI base URL
-    private static final String ML_URL = "http://localhost:8000";
-
     // ===============================
     // 🔵 TEXT PREDICTION
     // ===============================
@@ -48,7 +48,7 @@ public class PredictService {
         Map<String, Object> body = Map.of("text", text);
 
         Map<String, Object> response = restTemplate.postForObject(
-                ML_URL + "/predict",
+                mlUrl + "/predict",
                 body,
                 Map.class
         );
@@ -80,7 +80,7 @@ public class PredictService {
         body.put("url", url);
 
         Map<String, Object> response = restTemplate.postForObject(
-                ML_URL + "/predict_url",
+                mlUrl + "/predict_url",
                 body,
                 Map.class
         );
@@ -115,7 +115,7 @@ public class PredictService {
         body.put("image_base64", base64Image);
 
         Map<String, Object> response = restTemplate.postForObject(
-                ML_URL + "/predict_image",
+                mlUrl + "/predict_image",
                 body,
                 Map.class
         );
