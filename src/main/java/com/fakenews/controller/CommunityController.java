@@ -6,6 +6,8 @@ import com.fakenews.model.VoteType;
 import com.fakenews.repository.CommunityVoteRepository;
 import com.fakenews.repository.HistoryRepository;
 import com.fakenews.repository.UserRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +46,9 @@ public class CommunityController {
         // ✅ Make it EFFECTIVELY FINAL
         final Long finalUserId = userId;
 
-        return historyRepo.findAll()
+        return historyRepo
+                .findAll(PageRequest.of(0, 15, Sort.by(Sort.Direction.DESC, "createdAt")))
+                .getContent()
                 .stream()
                 .map(h -> {
 

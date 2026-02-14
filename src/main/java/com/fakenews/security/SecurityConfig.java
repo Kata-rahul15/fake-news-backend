@@ -47,6 +47,7 @@ public class SecurityConfig {
                                 "/api/predict_url",
                                 "/api/predict_image",
                                 "/api/stats/home",
+                                "/community/feed",
                                 "/error"
                         ).permitAll()
 
@@ -86,7 +87,6 @@ public class SecurityConfig {
 
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
-                "http://localhost:3000",
                 "https://fake-news-frontend-ebon.vercel.app"
         ));
 
